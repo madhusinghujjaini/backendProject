@@ -22,11 +22,22 @@ app.post('/addTask', (req, res) => {
     res.status(200).send({ sucess: 'date save sucessfully' })
 })
 
-app.put('/updateTask:task', (req, res) => {
-    console.log(req.task)
-    res.status(200).send({ sucess: 'date save sucessfully' })
+app.put('/updateTask', (req, res) => {
+    console.log(req.body)
+    let task = taskList.find(ele=> {
+        return  ele.id == req.body.id})
+        task.taskName = req.body.taskName;
+        task.description = req.body.description;
+    res.status(200).send({ sucess: 'date updated sucessfully' })
+})
+
+app.delete('/deleteTask',(req,res)=>{
+    let _tasklist = taskList.filter(ele=> ele.id != req.body.id);
+    console.log(_tasklist);
+    taskList = _tasklist;
+    res.status(200).send("Task Deleted");
 })
 
 function getRendomID() {
-    return (Math.random() * 100000000000000000);
+    return (Math.random() * 1000000000000000000);
 }
