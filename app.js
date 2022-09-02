@@ -25,15 +25,15 @@ app.post('/addTask', (req, res) => {
 app.put('/updateTask', (req, res) => {
     console.log(req.body)
     let task = taskList.find(ele=> {
-        return  ele.id == req.body.id})
-        task.taskName = req.body.taskName;
-        task.description = req.body.description;
+        return  ele.id == req.body.id
+    })
+    task.taskName = req.body.taskName;
+    task.description = req.body.description;
     res.status(200).send({ sucess: 'date updated sucessfully' })
 })
 
 app.delete('/deleteTask',(req,res)=>{
     let _tasklist = taskList.filter(ele=> ele.id != req.body.id);
-    console.log(_tasklist);
     taskList = _tasklist;
     res.status(200).send("Task Deleted");
 })
